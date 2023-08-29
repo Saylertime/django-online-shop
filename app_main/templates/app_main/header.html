@@ -1,0 +1,138 @@
+{% load static %}
+
+<body class="Site">
+  <header class="Header">
+    <div class="ControlPanel">
+      <div class="wrap">
+        <div class="row ControlPanel-row">
+          <div class="row-block">
+            <div class="row ControlPanel-rowSplit">
+              <div class="row-block"><a class="ControlPanel-title" href="#">Бесплатная доставка</a>
+              </div>
+              <div class="row-block hide_700"><span class="ControlPanel-title">Подписывайтесь!</span>
+               <ul class="menu menu_img menu_smallImg ControlPanel-menu">
+                <li class="menu-item"><a class="menu-link" href="#"><img src="{% static 'assets/img/icons/socialHeader/fb.svg' %}" alt="fb.svg"/></a>
+                  </li>
+                  <li class="menu-item"><a class="menu-link" href="#"><img src="{% static 'assets/img/icons/socialHeader/tw.svg' %}" alt="tw.svg"/></a>
+                  </li>
+                  <li class="menu-item"><a class="menu-link" href="#"><img src="{% static 'assets/img/icons/socialHeader/in.svg' %}" alt="in.svg"/></a>
+                  </li>
+                  <li class="menu-item"><a class="menu-link" href="#"><img src="{% static 'assets/img/icons/socialHeader/pt.svg' %}" alt="pt.svg"/></a>
+                  </li>
+                  <li class="menu-item"><a class="menu-link" href="#"><img src="{% static 'assets/img/icons/socialHeader/mail.svg' %}" alt="mail.svg"/></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <nav class="row-block">
+            <div class="row ControlPanel-rowSplit">
+                {% if request.user.is_authenticated %}
+              <div class="row-block"> <a class="ControlPanel-title" href="{% url 'logout' %}">Выйти из аккаунта</a>
+                  {% else %}
+              <div class="row-block"><a class="ControlPanel-title" href="{% url 'login' %}">Авторизация </a>/ <a class="ControlPanel-title" href="{% url 'register' %}">Регистрация</a>
+                  {% endif %}
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+    <div class="wrap">
+      <div class="row Header-rowMain">
+        <div class="row-block Header-logo"><a class="logo" href="{% url 'index' %}"><img class="logo-image" src="{% static 'assets/img/logo.png' %}" alt="logo.png"/></a>
+        </div>
+        <nav class="row-block row-block_right Header-menu">
+          <div class="menuModal" id="navigate">
+            <ul class="menu menu_main">
+              <li class="menu-item"><a class="menu-link" href="{% url 'index' %}">Главная</a>
+              </li>
+
+              <li class="menu-item"><a class="menu-link" href="{% url 'about' %}">О нас</a>
+              </li>
+              {% if request.user.is_authenticated %}
+              <li class="menu-item"><span class="menu-label menu-label_success">обновить</span><a class="menu-link" href="{% url 'profile_update' profile.pk %}">Аккаунт</a>
+              </li>
+              {% else %}
+              <li class="menu-item"><span class="menu-label menu-label_success">регистрация</span><a class="menu-link" href="{% url 'register' %}">Аккаунт</a>
+              </li>
+            {% endif %}
+              <li class="menu-item"><a class="menu-link" href="{% url 'catalog' %}">Каталог</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div class="row-block">
+          <div class="CartBlock"><a class="CartBlock-block" href="{% url 'cart' %}"><img class="CartBlock-img" src="{% static 'assets/img/icons/cart.svg' %}" alt="cart.svg"/><span class="CartBlock-amount">{{ cartitems_count }}</span></a>
+            <div class="CartBlock-block"><span class="CartBlock-price">₽{{ cartitem_sum }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row-block Header-trigger"><a class="menuTrigger" href="#navigate">
+            <div class="menuTrigger-content">Показать навигацию
+            </div><span></span><span></span><span></span></a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="Header-searchWrap">
+          <div class="wrap">
+            <div class="Header-categories">
+              <div class="CategoriesButton">
+                <div class="CategoriesButton-title">
+                  <div class="CategoriesButton-icon"><img src="{% static 'assets/img/icons/allDep.svg' %}" alt="allDep.svg"/>
+                  </div><span class="CategoriesButton-text">Все категории</span>
+                  <div class="CategoriesButton-arrow">
+                  </div>
+                </div>
+                <div class="CategoriesButton-content">
+
+                    {% for cat in all_cat %}
+
+                <div class="CategoriesButton-link"><a href="{% url 'category-detail' cat.id %}">
+                  {% if cat.photo %}
+                <div class="CategoriesButton-icon"><img src="{{ cat.photo.url }}" alt="Фотография" width="33">
+                  {% else %}
+                  <div class="CategoriesButton-icon"><img src="{% static 'assets/img/icons/departments/1.svg' %}" alt="1.svg"/>
+                    {% endif %}
+                </div><span class="CategoriesButton-text">{{ cat.category }}</span></a>
+                  {% if cat.has_subcategory %}
+                <a class="CategoriesButton-arrow" href="#"></a>
+                  {% endif %}
+                    <div class="CategoriesButton-submenu">
+
+                {% for sub in cat.subcat.all %}
+                {% if sub.category == cat %}
+                <a class="CategoriesButton-link" href="{% url 'subcategory-detail' sub.id %}">
+                <div class="CategoriesButton-icon"><img src="{{ sub.photo.url}}" width="33" alt="1.svg"/>
+                </div><span class="CategoriesButton-text">{{ sub.title }}</span></a>
+
+                {% endif %}
+                   {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+    </div>
+
+        <div class="Header-searchLink"><img src="{% static 'assets/img/icons/search.svg' %}" alt="search.svg"/>
+        </div>
+        <div class="Header-search">
+          <div class="search">
+            <form class="form form_search" action="{% url 'catalog' %}" method="get">
+              <input class="search-input" id="title" name="title" type="text" placeholder="Что вы ищете ..."/>
+              <button class="search-button" type="submit" ><img src="{% static 'assets/img/icons/search.svg' %}" alt="search.svg"/>Искать
+              </button>
+            </form>
+          </div>
+        </div>
+        </div>
+        </div>
+  </header>
+
+
+
+

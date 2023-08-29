@@ -1,0 +1,28 @@
+{% extends 'app_main/base.html' %}
+{% load static %}
+
+{% block title %} Авторизация {% endblock %}
+
+{% block description %} Авторизация {% endblock %}
+
+{% block content %}
+<body>
+
+{% if request.user.is_authenticated %}
+
+<h1><a href="{% url 'logout' %}">Выйти из аккаунта</a></h1>
+
+{% else %}
+
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+  {{ form.as_p }}
+<input type="submit" value="Войти">
+</form>
+
+{% endif %}
+
+{% endblock %}
+
+</body>
+</html>

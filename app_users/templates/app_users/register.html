@@ -1,0 +1,30 @@
+{% extends 'app_main/base.html' %}
+{% load static %}
+
+{% block title %} Регистрация {% endblock %}
+
+{% block description %} Страница для создания нового пользователя {% endblock %}
+
+{% block content %}
+<body>
+
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+    <h3>Ник: {{ form.username }}</h3>
+    <h3>Имя: {{ form.first_name }}</h3>
+    <h3>Отчество (необязательно): {{ form.middle_name }}</h3>
+    <h3>Фамилия: {{ form.last_name }}</h3>
+    <h3>Пароль: {{ form.password1 }}</h3>
+    <h3>Повторите пароль: {{ form.password2 }}</h3>
+    <h3>Email: {{ form.email }}</h3>
+    <h3>Телефон: {{ form.phone}}</h3>
+    <h3>Аватар (необязательно): {{ form.avatar}}</h3>
+
+<input type="submit" value="Зарегистрироваться">
+</form>
+
+
+{% endblock %}
+
+</body>
+</html>

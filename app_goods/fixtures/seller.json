@@ -1,0 +1,1 @@
+[{"model": "app_goods.seller", "pk": 1, "fields": {"name": "МВидео"}}, {"model": "app_goods.seller", "pk": 2, "fields": {"name": "Эльдорадо"}}, {"model": "app_goods.seller", "pk": 3, "fields": {"name": "Хофф"}}, {"model": "app_goods.seller", "pk": 4, "fields": {"name": "Пятерочка"}}, {"model": "app_goods.seller", "pk": 5, "fields": {"name": "Твой Дом"}}]

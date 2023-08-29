@@ -1,0 +1,182 @@
+{% extends 'app_main/base.html' %}
+{% load static %}
+
+{% block title %} Главная {% endblock %}
+
+{% block description %} Главная {% endblock %}
+
+{% block content %}
+
+  <div class="Middle">
+    <div class="Section">
+      <div class="wrap">
+        <div class="BannersHome">
+
+          {% for cat in best_cats %}
+          <a class="BannersHomeBlock" href="{% url 'category-detail' cat.pk %}">
+            <div class="BannersHomeBlock-row">
+              <div class="BannersHomeBlock-block">
+                <strong class="BannersHomeBlock-title">{{ cat }}
+                </strong>
+                <div class="BannersHomeBlock-content">от&#32;<span class="BannersHomeBlock-price">₽{{ cat.min_price }}</span>
+                </div>
+              </div>
+              <div class="BannersHomeBlock-block">
+                <div class="BannersHomeBlock-img"><img src="{{ cat.photo.url }}" alt="Фотография">
+                </div>
+              </div>
+            </div></a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+    <div class="Section Section_column Section_columnDesktop"  >
+      <div class="wrap">
+        <div class="Section-content">
+          <header class="Section-header">
+            <h2 class="Section-title">Популярные товары
+            </h2>
+          </header>
+          <div class="Cards">
+            {% for item in most_popular %}
+            <div class="Card"><a class="Card-picture" href="{% url 'item-detail' item.pk %}"><img src="{{ item.image.url }}" alt="card.jpg"/></a>
+              <div class="Card-content">
+                <strong class="Card-title"><a href="{% url 'item-detail' item.pk %}">{{ item.title }}</a>
+                </strong>
+                <div class="Card-description">
+                  <div class="Card-cost"><span class="Card-price">{{ item.price }} рублей</span>
+                  </div>
+                  <div class="Card-category"> КАТЕГОРИЯ
+                  </div>
+                   <form method="post">
+                        {% csrf_token %}
+                        {{ add_form.as_p }}
+                        <input type="hidden" name="item_pk" value="{{ item.pk }}">
+                  <div class="Card-hover">
+                   <button type="submit">
+                              <img src="{% static 'assets/img/icons/card/cart.svg' %}" alt="cart.svg">
+                                </button>
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+{% endfor %}
+          </div>
+          </div>
+        </div>
+      </div>
+
+
+   <div class="Section Section_column Section_columnRight">
+      <div class="wrap">
+        <div class="Section-column">
+          <div class="Section-columnSection Section-columnSection_mark">
+            <div class="media media_advantage">
+              <div class="media-image"><img src="{% static 'assets/img/icons/advantages/shipping.svg' %}" alt="shipping.svg"/>
+              </div>
+              <div class="media-content">
+                <strong class="media-title">Забирайте сами
+                </strong>
+                <p class="media-text">Мы сидим в Митино
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="Section-columnSection Section-columnSection_mark">
+            <div class="media media_advantage">
+              <div class="media-image"><img src="{% static 'assets/img/icons/advantages/moneyBack.svg' %}" alt="moneyBack.svg"/>
+              </div>
+              <div class="media-content">
+                <strong class="media-title">Деньги не возвращаем
+                </strong>
+                <p class="media-text">Уже потратили
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="Section-columnSection Section-columnSection_mark">
+            <div class="media media_advantage">
+              <div class="media-image"><img src="{% static 'assets/img/icons/advantages/support.svg' %}" alt="support.svg"/>
+              </div>
+              <div class="media-content">
+                <strong class="media-title">Вызовем полицию
+                </strong>
+                <p class="media-text">Бесполезные операторы
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="Section-columnSection Section-columnSection_mark">
+            <div class="media media_advantage">
+              <div class="media-image"><img src="{% static 'assets/img/icons/advantages/quality.svg' %}" alt="quality.svg"/>
+              </div>
+              <div class="media-content">
+                <strong class="media-title">Никаких гарантий
+                </strong>
+                <p class="media-text">Худшее обслуживание
+                </p>
+              </div>
+            </div>
+          </div>
+          </div>
+
+
+   <div class="Section-content">
+          <div class="Slider Slider_carousel">
+            <header class="Section-header Section-header_close">
+              <h2 class="Section-title">Limited edition
+              </h2>
+              <div class="Section-control">
+                <div class="Slider-navigate">
+                </div>
+              </div>
+            </header>
+            <div class="Slider-box Cards">
+
+
+            {% for item in limited_items %}
+              <div class="Slider-item">
+                <div class="Slider-content">
+                  <div class="Card"><a class="Card-picture" href="{% url 'item-detail' item.pk %}"><img src="{{ item.image.url }}" alt="card.jpg"/></a>
+                    <div class="Card-content">
+                      <strong class="Card-title"><a href="{% url 'item-detail' item.pk %}">{{ item }}</a>
+                      </strong>
+                      <div class="Card-description">
+                        <div class="Card-cost"><span class="Card-price">{{ item.price }} </span>
+                        </div>
+                        <div class="Card-category">{{ item.category }} {% if item.sub_category %} / {{ item.sub_category }} {% endif %}
+                        </div>
+                        <form method="post">
+                        {% csrf_token %}
+                        {{ add_form.as_p }}
+                        <input type="hidden" name="item_pk" value="{{ item.pk }}">
+                        <div class="Card-hover">
+                          <button type="submit">
+                              <img src="{% static 'assets/img/icons/card/cart.svg' %}" alt="cart.svg">
+                                </button>
+                        </div>
+                        </form>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+{% endblock %}
+</body></html>

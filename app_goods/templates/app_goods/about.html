@@ -1,0 +1,154 @@
+{% extends 'app_main/base.html' %}
+{% load static %}
+
+{% block title %} О нас {% endblock %}
+
+{% block description %} Описание магазина {% endblock %}
+
+{% block content %}
+
+  <div class="Middle Middle_top">
+    <div class="Middle-top">
+      <div class="wrap">
+        <div class="Middle-header">
+          <h1 class="Middle-title">О магазине
+          </h1>
+          <ul class="breadcrumbs Middle-breadcrumbs">
+            <li class="breadcrumbs-item"><a href="{% url 'index' %}">Главная</a>
+            </li>
+            <li class="breadcrumbs-item breadcrumbs-item_current"><span>О нас</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="Section Section_column Section_columnLeft Section_columnWide">
+      <div class="wrap">
+        <div class="Section-column">
+          <div class="Section-columnSection Section-columnSection_mark">
+            <div class="media media_advantage">
+              <div class="media-image"><img src="{% static 'assets/img/icons/advantages/shipping.svg' %}" alt="shipping.svg"/>
+              </div>
+              <div class="media-content">
+                <strong class="media-title">Ничего не доставляем
+                </strong>
+                <p class="media-text">Даже со склада не вынесем
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="Section-columnSection Section-columnSection_mark">
+            <div class="media media_advantage">
+              <div class="media-image"><img src="{% static 'assets/img/icons/advantages/moneyBack.svg' %}" alt="moneyBack.svg"/>
+              </div>
+              <div class="media-content">
+                <strong class="media-title"Деньги не вернем
+                </strong>
+                <p class="media-text">Гарантированно останутся у нас
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="Section-columnSection Section-columnSection_mark">
+            <div class="media media_advantage">
+              <div class="media-image"><img src="{% static 'assets/img/icons/advantages/support.svg' %}" alt="support.svg"/>
+              </div>
+              <div class="media-content">
+                <strong class="media-title">Поддержки нет
+                </strong>
+                <p class="media-text">И телефона тоже
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="Section-columnSection Section-columnSection_mark">
+            <div class="media media_advantage">
+              <div class="media-image"><img src="{% static 'assets/img/icons/advantages/quality.svg' %}" alt="quality.svg"/>
+              </div>
+              <div class="media-content">
+                <strong class="media-title">Качество ужасное
+                </strong>
+                <p class="media-text">Сломано из коробки
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="Section-columnSection">
+            <header class="Section-header">
+              <strong class="Section-title">Подпишитесь
+              </strong>
+            </header>
+            <div class="Section-columnContent">
+              <div class="Footer-payments Footer-payments_column">
+                <div><img src="{% static 'assets/img/icons/socialContent/fb.png' %}" alt="fb.png"/>
+                </div>
+                <div><img src="{% static 'assets/img/icons/socialContent/tw.png' %}" alt="tw.png"/>
+                </div>
+                <div><img src="{% static 'assets/img/icons/socialContent/gg.png' %}" alt="gg.png"/>
+                </div>
+                <div><img src="{% static 'assets/img/icons/socialContent/in.png' %}" alt="in.png"/>
+                </div>
+                <div><img src="{% static 'assets/img/icons/socialContent/pt.png' %}" alt="pt.png"/>
+                </div>
+                <div><img src="{% static 'assets/img/icons/socialContent/ml.png' %}" alt="ml.png"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="Section-content">
+          <article class="Article">
+            <div class="Article-section">
+              <div class="row row_verticalCenter row_maxHalf">
+                <div class="row-block">
+                  <h2>Почему наш магазин
+                  </h2>
+                  <p>Вопрос, который мучает нас самих
+                  </p>
+                  <p>Качество хуже, чем в Subway. А ведь у нас даже нет еды!
+                  </p>
+                  <div><a class="btn btn_primary" href="{% url 'catalog' %}">Начните покупать</a>
+                  </div>
+                </div>
+                <div class="row-block">
+                  <div class="pict"><img src="{% static 'assets/img/content/home/slider.png' %}" alt="slider.png"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="Article-section">
+              <div class="row row_verticalCenter row_maxHalf">
+                <div class="row-block">
+                  <div class="pict"><img src="{% static 'assets/img/content/home/bigGoods.png' %}" alt="bigGoods.png"/>
+                  </div>
+                </div>
+                <div class="row-block">
+                  <h2>История магазина
+                  </h2>
+                  <p>Открылись в январе 2023 года
+                  </p>
+                  <ul>
+                    <li>Возможно, скоро закроемся
+                    </li>
+                    <li>Купи слона
+                    </li>
+                    <li>Я серьезно, мы на грани закрытия
+                    </li>
+                    <li>Бизнес под угрозой
+                    </li>
+                    <li>Принимаем донаты
+                    </li>
+                    <li>Дрель нужна?
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+</body></html>

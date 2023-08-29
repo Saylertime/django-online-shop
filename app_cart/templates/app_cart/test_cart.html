@@ -1,0 +1,95 @@
+{% extends 'app_main/base.html' %}
+{% load static %}
+
+{% block title %} Корзина {% endblock %}
+
+{% block description %} Корзина {% endblock %}
+
+{% block content %}
+
+
+
+
+  <div class="Middle Middle_top">
+    <div class="Middle-top">
+      <div class="wrap">
+        <div class="Middle-header">
+          <h1 class="Middle-title">Корзина
+          </h1>
+          <ul class="breadcrumbs Middle-breadcrumbs">
+            <li class="breadcrumbs-item"><a href="index.html">home</a>
+            </li>
+            <li class="breadcrumbs-item breadcrumbs-item_current"><span>Корзина</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="Section">
+      <div class="wrap">
+
+            {% for item in cartitems %}
+        <form class="form Cart" method="post">
+          {% csrf_token %}
+          <div class="Cart-product">
+            <div class="Cart-block Cart-block_row">
+              <div class="Cart-block Cart-block_pict"><a class="Cart-pict" href="#"><img class="Cart-img" src="{{ item.item.image.url }}" alt="card.jpg"/></a>
+              </div>
+              <div class="Cart-block Cart-block_info"><a class="Cart-title" href="#">{{ item.item.title }}</a>
+                <div class="Cart-desc"> {{ item.item.description }}
+                </div>
+              </div>
+              <div class="Cart-block Cart-block_price">
+                <div class="Cart-price"> ₽{{ item.item_sum }}
+                </div>
+              </div>
+            </div>
+            <div class="Cart-block Cart-block_row">
+              <div class="Cart-block Cart-block_seller">
+              </div>
+              <div class="Cart-block Cart-block_amount">
+                <div class="Cart-amount">
+                  <div class="Amount">
+                    <button class="Amount-remove" type="button">
+                    </button>
+                <input type="hidden" name="item_pk{{ forloop.counter }}" value="{{ item.pk }}">
+                <input class="Amount-input form-input" name="amount{{ forloop.counter }}" type="text" value="{{ item.quantity }}"/>
+                    <button class="Amount-add" type="button">
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="Cart-block Cart-block_delete">
+                <input  name="item_delete" value="{{ item.pk }}">
+                <button type="submit"><img src="{% static 'assets/img/icons/card/delete.svg' %}" alt="delete.svg"/></button>
+              </div>
+            </div>
+          </div>
+
+{% endfor %}
+
+
+          <div class="Cart-total">
+            <div class="Cart-block Cart-block_total">
+              <strong class="Cart-title">Итого:
+                {% if total_sum %}
+              </strong><span class="Cart-price">₽{{ total_sum }}</span>
+              {% else %}
+              </strong><span class="Cart-price">₽ 0</span>
+              {% endif %}
+            </div>
+            <div class="Cart-block"><button class="btn btn_success btn_lg" type="submit">Оформить заказ</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}
+</body></html>

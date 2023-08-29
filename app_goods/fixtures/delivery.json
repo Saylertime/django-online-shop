@@ -1,0 +1,1 @@
+[{"model": "app_goods.delivery", "pk": 1, "fields": {"delivery_type": "Платная"}}, {"model": "app_goods.delivery", "pk": 2, "fields": {"delivery_type": "Бесплатная"}}]

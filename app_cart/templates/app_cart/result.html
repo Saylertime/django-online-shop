@@ -1,0 +1,48 @@
+{% extends 'app_main/base.html' %}
+{% load static %}
+
+{% block title %} Финал {% endblock %}
+
+{% block description %} Прошла оплата или нет {% endblock %}
+
+{% block content %}
+<body>
+
+  <div class="Middle Middle_top">
+    <div class="Middle-top">
+      <div class="wrap">
+        <div class="Middle-header">
+          <h1 class="Middle-title">Оплата
+          </h1>
+          <ul class="breadcrumbs Middle-breadcrumbs">
+            <li class="breadcrumbs-item"><a href="{% url 'catalog' %}">На главную</a>
+            </li>
+            <li class="breadcrumbs-item breadcrumbs-item_current"><span>Оплата</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="Section">
+      <div class="wrap">
+        <div class="form Payment">
+          {% csrf_token %}
+          <div class="Payment-card">
+            <div class="form-group">
+          <h1 >{{ message }}</h1>
+            </div>
+            <h2>{{ error }} </h2>
+          </div>
+      <a href="{% url 'profile-history' profile.pk %}">  <button class="Payment-pay btn btn_primary">Посмотреть историю заказов</button> </a>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+{% endblock %}
+</body></html>

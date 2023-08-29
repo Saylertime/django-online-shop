@@ -1,0 +1,238 @@
+{% extends 'app_main/base.html' %}
+{% load static %}
+
+{% block title %} О товаре {% endblock %}
+
+{% block description %} О товаре {% endblock %}
+
+{% block content %}
+
+
+  <div class="Middle Middle_top">
+    <div class="Middle-top">
+      <div class="wrap">
+        <div class="Middle-header">
+          <h1 class="Middle-title">{{ item }}
+          </h1>
+          <ul class="breadcrumbs Middle-breadcrumbs">
+            <li class="breadcrumbs-item"><a href="index.html">home</a>
+            </li>
+            <li class="breadcrumbs-item breadcrumbs-item_current"><span>Product</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+ <div class="Section">
+      <div class="wrap">
+        <div class="Product">
+          <div class="ProductCard">
+            <div class="ProductCard-look">
+              <div class="ProductCard-photo">
+                <img src="{{ item.image.url }}" alt="bigGoods.png"/>
+              </div>
+              <div class="ProductCard-picts">
+                <a class="ProductCard-pict ProductCard-pict_ACTIVE" href="{{ item.image.url }}"><img src="{{ item.image.url }}" alt="main photo"/></a>
+                {% if item.image2 %}
+                <a class="ProductCard-pict" href="{{ item.image2.url }}"><img src="{{ item.image2.url }}" alt="slider.png"/></a>
+                {% endif %}
+                {% if item.image3 %}
+                <a class="ProductCard-pict" href="{{ item.image3.url }}"><img src="{{ item.image3.url }}" alt="videoca.png"/></a>
+                {% endif %}
+              </div>
+            </div>
+            <div class="ProductCard-desc">
+              <div class="ProductCard-header">
+                <h2 class="ProductCard-title">{{ item }}
+                </h2>
+                <div class="ProductCard-info">
+                  <div class="ProductCard-cost">
+                    <div class="ProductCard-price">{{ item.price }} рублей
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="ProductCard-text">
+                <ul>
+                  <li> {{ item.description|linebreaks }}
+                  </li>
+                </ul>
+              </div>
+              <form method="post">
+              <div class="ProductCard-cart">
+                <div class="ProductCard-cartElement ProductCard-cartElement_amount">
+                  <div class="Amount Amount_product">
+                    <button class="Amount-remove" type="button">
+                    </button>
+                    <input class="Amount-input" type="text" name="amount" id="amount" value="1">
+                    <button class="Amount-add" type="button" id="increment-button">+</button>
+                    </button>
+                  </div>
+                </div>
+                  {% csrf_token %}
+                  {{ add_form.as_p }}
+                  <div class="ProductCard-cartElement">
+                  <button class="btn btn_primary" type="submit">
+                  <img class="btn-icon" src="{% static 'assets/img/icons/card/cart_white.svg' %}" alt="cart_white.svg"/><span class="btn-content">В корзину</span></a>
+                </button>
+                </form>
+                </div>
+              </div>
+              <div class="ProductCard-footer">
+                <div class="ProductCard-tags">
+                  <strong class="ProductCard-tagsTitle">Tags:
+                  </strong><a href="#">Accesories</a>,<a href="#">Creative</a>,<a href="#">Design</a>,<a href="#">Gaming</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="Tabs Tabs_default">
+            <div class="Tabs-links"><a class="Tabs-link_ACTIVE Tabs-link" href="#description"><span>Описание</span></a><a class="Tabs-link" href="#addit"><span>Дополнительная информация</span></a><a class="Tabs-link" href="#reviews"><span>Отзывы ({{ item.review.count }})</span></a>
+            </div>
+            <div class="Tabs-wrap">
+              <div class="Tabs-block" id="description">
+                <h2>БЕЗУМНО КРУТОЙ ТОВАР
+                </h2>
+                <p>{{ item.description }}
+                </p><img class="pict pict_right" src="{{ item.image.url }}" alt="bigGoods.png"/>
+                <ul>
+                  <li>Невероятный
+                  </li>
+                  <li>Шикарный
+                  </li>
+                  <li>Лучшее, что есть на рынке
+                  </li>
+                  <li>Безумно можно быть первым
+                  </li>
+                  <li>Работает, как рязанские часы
+                  </li>
+                  <li>Купи слона
+                  </li>
+                </ul>
+                <div class="clearfix">
+                </div>
+                <div class="table">
+                  <table>
+                    <tr>
+                      <th>Характеристика
+                      </th>
+                      <th>Значение
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>Можно ли описать это произведение обычными словами?
+                      </td>
+                      <td>Никак нет
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="Tabs-block" id="sellers">
+                <div class="Categories Categories_product">
+                </div>
+              </div>
+              <div class="Tabs-block" id="addit">
+                <div class="Product-props">
+                  <div class="Product-prop">
+                    <strong>Количество проданных:
+                    </strong><span> {{ item.sold_quantity }}</span>
+                  </div>
+                  <div class="Product-prop">
+                    <strong>Доставка
+                    </strong><span> {{ item.delivery }}</span>
+                  </div>
+                  <div class="Product-prop">
+                    <strong>Продавец
+                    </strong><span> {{ item.seller }}</span>
+                  </div>
+                  <div class="Product-prop">
+                    <strong>Лимитированный
+                      {% if item.limited %}
+                    </strong><span> Ограниченная коллекция</span>
+                    {% else %}
+                    </strong><span> Полным полно</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <div class="Tabs-block" id="reviews">
+
+                <a id="anchor_reviews"></a>
+                <header class="Section-header">
+                  <h3 class="Section-title">Отзывы
+                  </h3>
+                </header>
+
+                {% if item.review.all %}
+{% for review in item.review.all %}
+
+
+                <div class="Comments">
+                  <div class="Comment">
+                    <div class="Comment-column Comment-column_pict">
+                      <div class="Comment-avatar">
+                      </div>
+                    </div>
+                    <div class="Comment-column">
+                      <header class="Comment-header">
+                        <div>
+                          <strong class="Comment-title">{{ review.author.first_name }} {{ review.author.last_name }}
+                          </strong><span class="Comment-date">{{ review.posted_at }}</span>
+                        </div>
+                      </header>
+                      <div class="Comment-content">{{ review.text }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {% endfor %}
+                {% else %}
+
+<p>Отзывов пока нет. Оставьте первый!</p>
+                {% endif %}
+
+                {% if request.user.is_authenticated %}
+                <header class="Section-header Section-header_product">
+                  <h3 class="Section-title">Добавить отзыв
+                  </h3>
+                </header>
+                <div class="Tabs-addComment">
+                  <form class="form" action="#" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      {{ form.text }}
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="row-block">
+                          {{ form.name }}
+                        </div>
+                        <div class="row-block">
+                          {{ form.email }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn_muted" type="submit">Отправить
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% else %}
+
+<h3>Сначала <a href="{% url 'login' %}">авторизуйтесь </a> или <a href="{% url 'register' %}">зарегистрируйтесь</a></h3>
+
+{% endif %}
+
+{% endblock %}
+</body></html>

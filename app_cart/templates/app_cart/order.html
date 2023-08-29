@@ -1,0 +1,174 @@
+{% extends 'app_main/base.html' %}
+{% load static %}
+
+{% block title %} Оформление заказа {% endblock %}
+
+{% block description %} Оформление заказа {% endblock %}
+
+{% block content %}
+
+
+{{form.non_field_errors }}
+
+
+
+  <div class="Middle Middle_top">
+    <div class="Middle-top">
+      <div class="wrap">
+        <div class="Middle-header">
+          <h1 class="Middle-title">Оформление заказа
+          </h1>
+          <ul class="breadcrumbs Middle-breadcrumbs">
+            <li class="breadcrumbs-item"><a href="index.html">home</a>
+            </li>
+            <li class="breadcrumbs-item breadcrumbs-item_current"><span>Оформление заказа</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="Section Section_column Section_columnRight Section_columnWide Order">
+      <div class="wrap">
+        <div class="Section-column">
+          <div class="Section-columnSection">
+            <header class="Section-header">
+              <strong class="Section-title">Прогресс заполнения
+              </strong>
+            </header>
+            <div class="Section-columnContent">
+              <ul class="menu menu_vt Order-navigate">
+                <li class="menu-item_ACTIVE menu-item"><a class="menu-link" href="#step1">Шаг 1. Параметры пользователя</a>
+                </li>
+                <li class="menu-item"><a class="menu-link" href="#step2">Шаг 2. Способ доставки</a>
+                </li>
+                <li class="menu-item"><a class="menu-link" href="#step3">Шаг 3. Способ оплаты</a>
+                </li>
+                <li class="menu-item"><a class="menu-link" href="#step4">Шаг 4. Подтверждение заказа</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="Section-content">
+
+
+          {% if request.user.is_authenticated %}
+
+          <form class="form" action="#" method="post">
+            {% csrf_token %}
+            <div class="Order-block Order-block_OPEN" id="step1">
+              <header class="Section-header Section-header_sm">
+                <h2 class="Section-title">Шаг 1. Параметры пользователя
+                </h2>
+              </header>
+              <div class="row">
+                <div class="row-block">
+                  <div class="form-group">
+                    <label class="form-label" for="name">Имя
+                    </label>
+                 {{ form.first_name }}
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="phone">Отчество
+                      {{ form.middle_name }}
+                    </label>
+
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="mail">Фамилия
+                    </label>
+                   {{ form.last_name }}
+                  </div>
+                </div>
+                <div class="row-block">
+                  <div class="form-group">
+                    <label class="form-label" for="password">Email
+                    </label>
+                    {{ form.email}}
+                  </div>
+                  {% for error in form.non_field_errors %}
+                   <strong>{{ error }}</strong>
+                    {% endfor %}
+                  <div class="form-group">
+                    <label class="form-label" for="passwordReply">Телефон
+                      {{ form.phone }}
+                    </label>
+                  </div>
+                  <div class="form-group"><div class="btn btn_muted Order-btnReg">Я уже зарегистрирован</div>
+                  </div>
+                </div>
+              </div>
+              <div class="Order-footer">
+             <button class="btn btn_success" type="submit">Дальше</button>
+              </div>
+            </div>
+          </form>
+
+
+
+            {% else %}
+          <form class="form" action="#" method="post">
+            {% csrf_token %}
+
+            <div class="Order-block Order-block_OPEN" id="step1">
+              <header class="Section-header Section-header_sm">
+                <h2 class="Section-title">Шаг 1. Параметры пользователя
+                </h2>
+              </header>
+              <div class="row">
+                <div class="row-block">
+                  <div class="form-group">
+                    <label class="form-label" for="name">ФИО
+                    </label>
+                    {{ register_form.fio }}
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="phone">Телефон
+                    </label>
+                   {{ register_form.phone }}
+                  </div>
+                <div class="form-group">
+                    <label class="form-label" for="mail">E-mail</label>
+                     {{ register_form.email }}
+                  {% for error in form.non_field_errors %}
+                   <strong>{{ error }}</strong>
+                    {% endfor %}
+                            </div>
+                </div>
+                <div class="row-block">
+                  <div class="form-group">
+                    <label class="form-label" for="password">Пароль
+                    </label>
+                   {{ register_form.password1 }}
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="passwordReply">Подтверждение пароля
+                    </label>
+                   {{ register_form.password2 }}
+                  </div>
+                  <div class="form-group"><a class="btn btn_muted Order-btnReg" href="{% url 'login' %}">Я уже зарегистрирован</a>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn_success">Дальше</button>
+                </form>
+              </div>
+            </div>
+
+            {% endif %}
+     </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}
+</body></html>
+
+
